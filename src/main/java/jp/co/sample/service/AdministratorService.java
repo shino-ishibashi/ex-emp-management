@@ -24,11 +24,12 @@ public class AdministratorService {
      */
     public boolean insertAdmin(Administrator admin){
         Administrator newAdmin = adminRepository.findByEmail(admin.getMailAddress());
-        if(Objects.isNull(newAdmin)){
-            return false;
+        //データが存在していたらture
+        if(Objects.nonNull(newAdmin)){
+            return true;
         }else {
             adminRepository.insertAdmin(admin);
-            return true;
+            return false;
         }
     }
 }

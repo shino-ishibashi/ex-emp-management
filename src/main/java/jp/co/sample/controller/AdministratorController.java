@@ -78,16 +78,17 @@ public class AdministratorController {
         insertAdmin.setMailAddress(adminForm.getEmail());
         insertAdmin.setPassword(adminForm.getPassword());
 
-        //存在していなかったらtrue
-        boolean isNotEmailExists = adminService.insertAdmin(insertAdmin);
+        //emailが存在していたらtrue
+        boolean isEmailExists = adminService.insertAdmin(insertAdmin);
 
-        if(isNotEmailExists){
-            //登録成功したのでlistへ
-            return "/employee/list";
-        }else{
+
+        if(isEmailExists){
             //DBにemailが存在していたので,errorを返す。
             model.addAttribute("emailExistsError",true);
-            return toLoginForm();
+            return toInserForm();
+        }else{
+            //登録成功したのでlistへ
+            return "/employee/list";
         }
     }
 }
