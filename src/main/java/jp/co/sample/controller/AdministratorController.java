@@ -24,6 +24,9 @@ public class AdministratorController {
     @Autowired
     private HttpSession session;
 
+    @Autowired
+    private EmployeeController employeeController;
+
     @ModelAttribute
     public LoginForm loginFormSetUp(){
         return new LoginForm();
@@ -54,10 +57,10 @@ public class AdministratorController {
 
         if(Objects.isNull(admin)){
             model.addAttribute("isFindAdmin",true);
-            session.setAttribute("loginUser", admin);
             return toLoginForm();
         }else{
-            return "/employee/list";
+            session.setAttribute("administratorName", admin.getName());
+            return employeeController.toEmpList(model);
         }
     }
 
@@ -88,7 +91,9 @@ public class AdministratorController {
             return toInserForm();
         }else{
             //登録成功したのでlistへ
-            return "/employee/list";
+
+            //employeeコントローラー作成後 MVCに基づいてControllerへのリンクに変更.
+            return employeeController.toEmpList(model);
         }
     }
 }
