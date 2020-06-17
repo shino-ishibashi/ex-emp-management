@@ -8,6 +8,7 @@ public class InsertAdministratorForm {
     private String name;
 
     @Email(message = "メールアドレスを入力してください")
+    @NotBlank(message = "メールアドレスが空欄です")
     private String email;
 
     @NotBlank(message = "パスワードを入力してください")

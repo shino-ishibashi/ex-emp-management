@@ -37,12 +37,46 @@ public class AdministratorRepository {
 
         adminList = template.query(sql, param, ADMIN_ROW_Mapper);
 
-        if(adminList.size() ==0){
+        if(adminList.isEmpty()){
             return null;
         }else {
             Administrator admin = adminList.get(0);
             return admin;
         }
+    }
+
+    public Administrator findByEmail(String email){
+        String sql = "SELECT id,name,mail_address,password FROM administrators WHERE mail_address = :email";
+
+//        データを受け取るためのList
+//        nullでもsize:0 として受け取れる
+        List<Administrator> adminList = new ArrayList<>();
+
+        SqlParameterSource param = new MapSqlParameterSource().addValue("email",email);
+
+        adminList = template.query(sql, param, ADMIN_ROW_Mapper);
+
+        if(adminList.isEmpty()){
+            return null;
+        }else {
+            Administrator admin = adminList.get(0);
+            return admin;
+        }
+    }
+
+
+
+
+    public void insertAdmin(Administrator admin){
+        String sql = "INSERT INTO administrators(name,mail_address,password) " +
+                "VALUES(:name, :email, :password)";
+
+        SqlParameterSource param = new MapSqlParameterSource()
+                                        .addValue("name",admin.getName())
+                                        .addValue("email",admin.getMailAddress())
+                                        .addValue("password",admin.getPassword());
+
+        template.update(sql,param);
     }
 
 }
