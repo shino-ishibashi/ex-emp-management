@@ -4,6 +4,14 @@ public class LoginForm {
     private String email;
     private String password;
 
+    @Override
+    public String toString() {
+        return "LoginForm{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     public String getEmail() {
         return email;
     }

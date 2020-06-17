@@ -30,11 +30,11 @@
 
 <!-- ここにモックのform要素を貼り付けます -->
 
-					<form method="post" action="../employee/list.html" th:action="@{/admin/login}" th:object="${loginForm}">
+					<form method="post" action="../employee/list.html" th:action="@{/admin/get-form}" th:object="${loginForm}">
 						<fieldset>
 							<legend>ログイン</legend>
 							<div class="form-group">
-								<div class="alert alert-danger">
+								<div class="alert alert-danger" th:if="${isFindAdmin}">
 									<p>メールアドレスまたはパスワードが間違っています</p>
 								</div>
 							</div>
