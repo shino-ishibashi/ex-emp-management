@@ -1,21 +1,52 @@
 package jp.co.sample.form;
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class UpdateEmployeeForm {
     private Integer id;
+
+    @NotBlank(message = "名前が空欄です")
     private String name;
+
     private String image;
+
+    @NotNull(message = "性別を選択してください")
     private String gender;
+
+    @NotBlank(message = "年を入力して下さい")
+    @Pattern(regexp = "[0-9]+",message = "数値を入力してください")
     private Integer hireYear;
+
+    @NotBlank(message = "年を入力して下さい")
+    @Pattern(regexp = "[0-9]+",message = "数値を入力してください")
+    @Size(min = 1,max = 12,message = "1-12を入力してください")
     private Integer hireMonth;
+
+    @NotBlank(message = "年を入力して下さい")
+    @Pattern(regexp = "[0-9]+",message = "数値を入力してください")
+    @Size(min = 1,max = 31,message = "1-12を入力してください")
     private Integer hireDay;
+
+    @Email(message = "メールアドレスを入力してください")
     private String mailAddress;
+
+    @NotBlank(message = "郵便番号を入力してください")
     private String zipCode;
+
+    @NotBlank(message = "郵便番号を入力してください")
     private String address;
+
+    @NotBlank(message = "電話番号を入力してください")
     private String telephone;
+
+    @NotBlank(message = "給料を入力してください")
     private Integer salary;
+
+    @NotBlank(message = "特性を入力してください")
     private String characteristics;
+
+    @NotBlank(message = "扶養人数を入力してください")
     private Integer dependentsCount;
 
 //    getter setter
