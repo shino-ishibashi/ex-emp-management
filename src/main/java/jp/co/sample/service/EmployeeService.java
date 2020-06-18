@@ -20,7 +20,7 @@ public class EmployeeService {
         return employeeRepository.load(id);
     }
 
-    public void update(Integer id, String dependentsCount){
-        employeeRepository.update(id,dependentsCount);
+    public void update(Employee insertEmployee){
+        employeeRepository.update(insertEmployee);
     }
 }

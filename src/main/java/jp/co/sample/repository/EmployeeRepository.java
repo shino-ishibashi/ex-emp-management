@@ -36,6 +36,7 @@ public class EmployeeRepository {
     };
 
 
+
     public List<Employee> findAllEmployees(){
         String sql = "SELECT * FROM employees  ORDER BY hire_date ASC";
         List<Employee> employeeList = template.query(sql,EMPLOYEE_ROW_Mapper);
@@ -49,33 +50,28 @@ public class EmployeeRepository {
 
         Employee employee = template.queryForObject(sql, param,EMPLOYEE_ROW_Mapper);
 
+
+
         return employee;
     }
 
-    public void update(Integer id, String dependentsCount){
-        String sql = "UPDATE employees SET dependents_count = :dependentsCount where id = :id";
+    public void update(Employee employee){
+        String sql = "UPDATE employees SET name = :name,image = :image, gender = :gender, hire_date = :hire_date,mail_address = :mail_address , zip_code = :zip_code , address = :address , telephone = :telephone, salary = :salary,characteristics = :characteristics,dependents_count = :dependents_count where id = :id";
 
 
         SqlParameterSource param = new MapSqlParameterSource()
-                .addValue("id", String.valueOf(id))
-                .addValue("dependentsCount",dependentsCount);
-
-//        String sql = "UPDATE employees SET name = :name,image = :image, gender = :gender, hire_date = :hire_date,mail_address = :mail_address , zip_code = :zip_code , address = :address , telephone = :telephone, salary = :salary,characteristics = :characteristics,dependents_count = :dependents_count where id = :id";
-//
-//
-//        SqlParameterSource param = new MapSqlParameterSource()
-//                .addValue("id", employee.getId())
-//                .addValue("name", employee.getName())
-//                .addValue("image",employee.getImage())
-//                .addValue("gender",employee.getGender())
-//                .addValue("hire_date",employee.getHireDate())
-//                .addValue("mail_address",employee.getMailAddress())
-//                .addValue("zip_code",employee.getZipCode())
-//                .addValue("address",employee.getAddress())
-//                .addValue("telephone",employee.getTelephone())
-//                .addValue("salary",employee.getSalary())
-//                .addValue("characteristics",employee.getCharacteristics())
-//                .addValue("dependents_count",employee.getDependentsCount());
+                .addValue("id", employee.getId())
+                .addValue("name", employee.getName())
+                .addValue("image",employee.getImage())
+                .addValue("gender",employee.getGender())
+                .addValue("hire_date",employee.getHireDate())
+                .addValue("mail_address",employee.getMailAddress())
+                .addValue("zip_code",employee.getZipCode())
+                .addValue("address",employee.getAddress())
+                .addValue("telephone",employee.getTelephone())
+                .addValue("salary",employee.getSalary())
+                .addValue("characteristics",employee.getCharacteristics())
+                .addValue("dependents_count",employee.getDependentsCount());
 
         template.update(sql, param);
     }

@@ -2,6 +2,8 @@ package jp.co.sample.controller;
 
 
 import jp.co.sample.domain.Administrator;
+import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,16 +86,19 @@ public class AdministratorController {
         //emailが存在していたらtrue
         boolean isEmailExists = adminService.insertAdmin(insertAdmin);
 
-
         if(isEmailExists){
             //DBにemailが存在していたので,errorを返す。
             model.addAttribute("emailExistsError",true);
             return toInserForm();
         }else{
-            //登録成功したのでlistへ
-
-            //employeeコントローラー作成後 MVCに基づいてControllerへのリンクに変更.
-            return employeeController.toEmpList(model);
+            //管理者の登録に成功したので、ログイン画面に返す
+            return "redirect:/admin/login";
         }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(){
+        session.setAttribute("administratorName", null);
+        return toLoginForm();
     }
 }

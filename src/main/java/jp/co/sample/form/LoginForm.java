@@ -1,4 +1,4 @@
-package jp.co.sample.controller;
+package jp.co.sample.form;
 
 public class LoginForm {
     private String email;
